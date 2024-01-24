@@ -11,12 +11,18 @@ mysql = MySQL(app)
 
 @app.route('/academy', methods=['POST'])
 def saveAcademy():
+    if 'id' in request.json:
+        updateAcademy()
+    else:
+        saveAcademy()
+    return 'ok'
+
+def saveAcademy():
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO academies (name, phone, website) VALUES (%s, %s, %s);", (request.json['name'], request.json['phone'], request.json['website']))
     mysql.connection.commit()
     return 'saved academy'
 
-@app.route('/academy', methods=['PUT'])
 def updateAcademy():
     cur = mysql.connection.cursor()
     cur.execute("UPDATE academies SET academies.name = %s, academies.phone = %s, academies.website = %s WHERE academies.id = %s", (request.json['name'], request.json['phone'], request.json['website'], request.json['id']))
