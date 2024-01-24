@@ -10,21 +10,28 @@ app.config['MYSQL_DB'] = 'academies'
 mysql = MySQL(app)
 
 @app.route('/academy', methods=['POST'])
-def saveCustomer():
+def saveAcademy():
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO academies (name, phone, website) VALUES (%s, %s, %s);", (request.json['name'], request.json['phone'], request.json['website']))
     mysql.connection.commit()
     return 'saved academy'
 
+@app.route('/academy', methods=['PUT'])
+def updateAcademy():
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE academies SET academies.name = %s, academies.phone = %s, academies.website = %s WHERE academies.id = %s", (request.json['name'], request.json['phone'], request.json['website'], request.json['id']))
+    mysql.connection.commit()
+    return 'updated academy'
+
 @app.route('/academy/<int:id>', methods=['DELETE'])
-def removeCustomer(id):
+def removeAcademy(id):
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM academies WHERE academies.id = " + str(id) + ";")
     mysql.connection.commit()
     return 'removed academy'
 
 @app.route('/academy/<int:id>')
-def getCustomer(id):
+def getAcademy(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM academies WHERE academies.id = " + str(id) + ";")
     data = cur.fetchall()
@@ -34,7 +41,7 @@ def getCustomer(id):
     return jsonify(content)
 
 @app.route('/academies')
-def getAllCustomers():
+def getAllAcademies():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM academies ;")
     data = cur.fetchall()
