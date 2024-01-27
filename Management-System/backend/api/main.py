@@ -13,7 +13,6 @@ app.config['MYSQL_DB'] = 'academies'
 mysql = MySQL(app)
 
 @app.route('/academy', methods=['POST'])
-@cross_origin
 def saveAcademy():
     if 'id' in request.json:
         updateAcademy()
@@ -34,7 +33,6 @@ def updateAcademy():
     return 'updated academy'
 
 @app.route('/academy/<int:id>', methods=['DELETE'])
-@cross_origin
 def removeAcademy(id):
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM academies WHERE academies.id = " + str(id) + ";")
@@ -42,7 +40,6 @@ def removeAcademy(id):
     return 'removed academy'
 
 @app.route('/academy/<int:id>')
-@cross_origin
 def getAcademy(id):
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM academies WHERE academies.id = " + str(id) + ";")
@@ -53,7 +50,6 @@ def getAcademy(id):
     return jsonify(content)
 
 @app.route('/academies')
-@cross_origin
 def getAllAcademies():
     cur = mysql.connection.cursor()
     cur.execute("SELECT * FROM academies ;")
@@ -66,7 +62,7 @@ def getAllAcademies():
 
 @app.route('/')
 def index():
-    return render_template('frontend/index.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(None, 3000, True)

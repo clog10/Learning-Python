@@ -1,0 +1,70 @@
+<link href="{{ url_for('static',filename='menu.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename='style.css') }}" rel="stylesheet" type="text/css">
+<script src="{{ url_for('static',filename='script.js') }}"></script>
+
+<nav id="menu">
+    <input type="checkbox" id="responsive-menu" onclick="updatemenu()" /><label></label>
+    <ul>
+        <li><a href="http://">Home</a></li>
+        <li>
+            <a class="dropdown-arrow" href="http://">Products</a>
+            <ul class="sub-menus">
+                <li><a href="http://">Products Sub Menu 1</a></li>
+                <li><a href="http://">Products Sub Menu 2</a></li>
+                <li><a href="http://">Products Sub Menu 3</a></li>
+                <li><a href="http://">Products Sub Menu 4</a></li>
+            </ul>
+        </li>
+        <li><a href="http://">About</a></li>
+        <li>
+            <a class="dropdown-arrow" href="http://">Services</a>
+            <ul class="sub-menus">
+                <li><a href="http://">Services Sub Menu 1</a></li>
+                <li><a href="http://">Services Sub Menu 2</a></li>
+                <li><a href="http://">Services Sub Menu 3</a></li>
+            </ul>
+        </li>
+        <li><a href="http://">Contact Us</a></li>
+    </ul>
+</nav>
+</div>
+
+<h1>Gestión de la Academia</h1>
+
+<a onclick="agregar()" href="#" class="myButton">Agregar Academia</a>
+
+<div>
+    <table id="customers">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Website</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <div id="modal" class="modale" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <h2>Datos de la academia</h2>
+                <a onclick="cerrarModal()" href="#" class="btn-close closemodale" aria-hidden="true">&times;</a>
+            </div>
+
+            <div class="modal-body">
+                <input id="txtId" type="hidden" placeholder="ID" size="20" /><br />
+                <input id="txtName" type="text" placeholder="Name" size="20" /><br />
+                <input id="txtPhone" type="text" placeholder="Phone" size="20" /><br />
+                <input id="txtWebsite" type="text" placeholder="Website" size="20" /><br />
+            </div>
+            <div class="modal-footer">
+                <a onclick="save()" href="#" class="btn">Guardar</a>
+            </div>
+        </div>
+    </div>
+</div>
